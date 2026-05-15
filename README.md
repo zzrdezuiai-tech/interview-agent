@@ -6,10 +6,8 @@
 
 ## 在线页面
 
-部署到 GitHub Pages 后，可通过以下地址访问：
-
 ```text
-https://你的GitHub用户名.github.io/mianya-interview-agent/
+https://zzrdezuiai-tech.github.io/interview-agent/
 ```
 
 ## 项目介绍
