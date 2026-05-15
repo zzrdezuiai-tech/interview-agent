@@ -1,0 +1,17 @@
+{
+  "name": "mianya-interview-agent",
+  "version": "0.1.0",
+  "private": true,
+  "description": "面鸭 interview agent 静态项目页与产品文档。",
+  "scripts": {
+    "start": "python3 -m http.server 3000",
+    "serve": "python3 -m http.server 3000"
+  },
+  "keywords": [
+    "interview-agent",
+    "ai-interview",
+    "agent-harness",
+    "mianya"
+  ],
+  "license": "MIT"
+}

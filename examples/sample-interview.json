@@ -1,0 +1,16 @@
+{
+  "question": "请用 2 分钟说明：你如何判断一个 AI 产品功能是否值得投入研发？",
+  "score": 82,
+  "score_detail": {
+    "logic": 82,
+    "business_judgement": 76,
+    "data_awareness": 68,
+    "communication": 85
+  },
+  "reason": "回答覆盖了用户价值和研发成本，但缺少数据验证路径与风险评估。",
+  "follow_up": "如果用户反馈很好，但 GPU 成本很高，你会如何设计灰度策略？",
+  "suggestion": "建议补充目标用户规模、验证指标、成本阈值和灰度发布策略。",
+  "tts_text": "下面我会继续追问一个成本控制相关的问题。",
+  "risk_tag": ["数据意识不足", "成本评估不完整"],
+  "next_action": "追问商业化和资源投入判断"
+}

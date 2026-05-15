@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>面鸭 interview agent｜多模态 AI 求职训练平台</title>
+  <meta name="description" content="面鸭 interview agent 是面向产品经理、AI 产品经理、运营、数据分析师和技术转产品候选人的多模态 AI 求职训练 Agent 平台。" />
+  <style>
+    :root { --bg:#f7f8fb; --card:#ffffff; --text:#111827; --muted:#6b7280; --line:#e5e7eb; --brand:#ff6900; --brand-dark:#d95700; --soft:#fff3e8; --dark:#111827; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"PingFang SC","Microsoft YaHei",sans-serif; color:var(--text); background:var(--bg); line-height:1.65; }
+    a { color:inherit; text-decoration:none; }
+    .container { width:min(1120px, calc(100% - 40px)); margin:0 auto; }
+    header { position:sticky; top:0; z-index:20; background:rgba(247,248,251,.88); backdrop-filter:blur(14px); border-bottom:1px solid var(--line); }
+    .nav { height:68px; display:flex; align-items:center; justify-content:space-between; }
+    .logo { display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:-.02em; }
+    .logo-mark { width:34px; height:34px; border-radius:12px; background:linear-gradient(135deg,var(--brand),#ffb45c); display:grid; place-items:center; color:white; font-weight:900; }
+    .nav-links { display:flex; align-items:center; gap:22px; font-size:14px; color:var(--muted); }
+    .button { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 18px; border-radius:999px; background:var(--brand); color:white; font-weight:700; box-shadow:0 12px 28px rgba(255,105,0,.22); }
+    .button.secondary { background:white; color:var(--text); border:1px solid var(--line); box-shadow:none; }
+    button.button { border:none; cursor:pointer; font:inherit; }
+    .hero { padding:82px 0 56px; background:radial-gradient(circle at top left, rgba(255,105,0,.18), transparent 34%), radial-gradient(circle at top right, rgba(17,24,39,.08), transparent 32%); }
+    .hero-grid { display:grid; grid-template-columns:1.05fr .95fr; gap:44px; align-items:center; }
+    .badge { display:inline-flex; align-items:center; gap:8px; padding:7px 12px; border-radius:999px; background:var(--soft); color:var(--brand-dark); font-size:13px; font-weight:700; border:1px solid #ffd6b5; }
+    h1 { margin:20px 0 18px; font-size:clamp(38px,6vw,68px); line-height:1.05; letter-spacing:-.055em; }
+    .hero p { max-width:680px; font-size:18px; color:var(--muted); margin:0 0 28px; }
+    .hero-actions { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:28px; }
+    .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:26px; }
+    .stat { background:rgba(255,255,255,.72); border:1px solid var(--line); border-radius:18px; padding:16px; }
+    .stat strong { display:block; font-size:22px; letter-spacing:-.03em; }
+    .stat span { color:var(--muted); font-size:13px; }
+    .product-card { background:#111827; color:white; border-radius:32px; padding:24px; box-shadow:0 30px 80px rgba(17,24,39,.2); }
+    .screen { border-radius:24px; background:#0b1220; border:1px solid rgba(255,255,255,.12); overflow:hidden; }
+    .screen-top { height:44px; display:flex; align-items:center; gap:7px; padding:0 16px; background:rgba(255,255,255,.04); border-bottom:1px solid rgba(255,255,255,.08); }
+    .dot { width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,.36); }
+    .screen-body { padding:20px; }
+    .chat-row { margin-bottom:14px; padding:14px; border-radius:16px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08); }
+    .chat-row small { color:#9ca3af; display:block; margin-bottom:4px; }
+    .score-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:14px; }
+    .mini-score { background:rgba(255,255,255,.06); border-radius:14px; padding:12px; text-align:center; }
+    .mini-score b { color:#ffb45c; font-size:20px; display:block; }
+    .mini-score span { color:#cbd5e1; font-size:12px; }
+    section { padding:72px 0; }
+    .section-head { max-width:760px; margin-bottom:30px; }
+    h2 { margin:0 0 12px; font-size:clamp(28px,4vw,44px); line-height:1.12; letter-spacing:-.04em; }
+    .section-head p { color:var(--muted); font-size:17px; margin:0; }
+    .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .grid-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+    .timeline-list { display:grid; gap:14px; max-width:880px; }
+    .timeline-item { display:grid; grid-template-columns:132px 1fr; gap:18px; align-items:start; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:24px; padding:22px; }
+    .timeline-date { display:inline-flex; width:fit-content; padding:6px 11px; border-radius:999px; background:rgba(255,255,255,.1); color:#ffb45c; font-size:13px; font-weight:800; }
+    .timeline-content h3 { margin:0 0 8px; font-size:20px; }
+    .timeline-content p { margin:0; color:#cbd5e1; }
+    .card { background:var(--card); border:1px solid var(--line); border-radius:24px; padding:24px; box-shadow:0 16px 44px rgba(17,24,39,.04); }
+    .card h3 { margin:0 0 8px; font-size:20px; }
+    .card p { margin:0; color:var(--muted); }
+    .tag { display:inline-flex; padding:5px 10px; border-radius:999px; background:#f3f4f6; color:#374151; font-size:12px; font-weight:700; margin-bottom:14px; }
+    .flow { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
+    .flow-step { padding:18px; border-radius:20px; background:white; border:1px solid var(--line); min-height:140px; }
+    .flow-step b { display:inline-grid; place-items:center; width:30px; height:30px; border-radius:10px; background:var(--soft); color:var(--brand-dark); margin-bottom:12px; }
+    .flow-step strong { display:block; margin-bottom:6px; }
+    .flow-step span { color:var(--muted); font-size:14px; }
+    .dark-section { background:var(--dark); color:white; }
+    .dark-section .section-head p, .dark-section .card p { color:#cbd5e1; }
+    .dark-section .card { background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.1); box-shadow:none; }
+    .footer { padding:38px 0; border-top:1px solid var(--line); color:var(--muted); font-size:14px; }
+    .footer-grid { display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+    .modal-backdrop { position:fixed; inset:0; z-index:100; display:none; align-items:center; justify-content:center; padding:24px; background:rgba(17,24,39,.58); backdrop-filter:blur(8px); }
+    .modal-backdrop.is-open { display:flex; }
+    .modal { width:min(460px,100%); background:white; border-radius:28px; padding:26px; box-shadow:0 30px 90px rgba(17,24,39,.28); border:1px solid var(--line); }
+    .modal-head { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:18px; }
+    .modal h3 { margin:0 0 6px; font-size:24px; letter-spacing:-.03em; }
+    .modal p { margin:0; color:var(--muted); }
+    .modal-close { width:36px; height:36px; border:1px solid var(--line); border-radius:999px; background:#f9fafb; color:var(--text); cursor:pointer; font-size:20px; line-height:1; }
+    .contact-list { display:grid; gap:12px; margin-top:18px; }
+    .contact-item { display:block; padding:16px; border-radius:18px; background:#f9fafb; border:1px solid var(--line); }
+    .contact-item span { display:block; color:var(--muted); font-size:13px; margin-bottom:4px; }
+    .contact-item strong { display:block; color:var(--text); word-break:break-all; }
+    @media (max-width:900px) { .hero-grid,.grid-3,.grid-2,.flow { grid-template-columns:1fr; } .timeline-item { grid-template-columns:1fr; } .nav-links { display:none; } .stats { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="logo" href="#top" aria-label="面鸭 interview agent Home"><span class="logo-mark">面</span><span>面鸭 interview agent</span></a>
+      <nav class="nav-links"><a href="#product">产品</a><a href="#architecture">架构</a><button class="button contact-trigger" type="button" data-open-contact>联系项目</button></nav>
+    </div>
+  </header>
+  <main id="top">
+    <section class="hero"><div class="container hero-grid"><div><div class="badge">AI Interview Agent · Agent Harness · Multimodal Ready</div><h1>面向求职训练的多模态 AI 面试 Agent 平台</h1><p>面鸭Agent 将简历、JD、岗位能力矩阵、多轮追问、实时评分、TTS 语音播报和面后复盘报告整合为完整闭环，帮助候选人在接近真实面试的环境中持续训练。</p><div class="hero-actions"><a class="button" href="#demo">查看项目进展</a><a class="button secondary" href="#architecture">查看系统架构</a></div><div class="stats"><div class="stat"><strong>10–15 轮</strong><span>单次完整模拟面试链路</span></div><div class="stat"><strong>6 类</strong><span>面试官风格与岗位场景</span></div><div class="stat"><strong>5 步</strong><span>从输入到复盘的训练闭环</span></div></div></div><div class="product-card"><div class="screen"><div class="screen-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><div class="screen-body"><div class="chat-row"><small>Question Agent · 压力型 PM 面试官</small>请用 2 分钟说明：你如何判断一个 AI 产品功能是否值得投入研发？</div><div class="chat-row"><small>Evaluator Agent · 结构化评分</small>回答覆盖了用户价值和研发成本，但缺少数据验证路径与风险评估。</div><div class="score-grid"><div class="mini-score"><b>82</b><span>逻辑结构</span></div><div class="mini-score"><b>76</b><span>业务判断</span></div><div class="mini-score"><b>68</b><span>数据意识</span></div></div><div class="chat-row" style="margin-top:14px;"><small>Coach Agent · 下一轮追问</small>如果用户反馈很好，但 GPU 成本很高，你会如何设计灰度策略？</div></div></div></div></div></section>
+    <section id="product"><div class="container"><div class="section-head"><h2>从一次面试，到一套可持续训练系统</h2><p>面鸭Agent 面向产品经理、AI 产品经理、增长运营、数据分析师和技术转产品候选人，提供多岗位、多风格、多语言的 AI 面试训练。</p></div><div class="grid-3"><div class="card"><span class="tag">简历 / JD 解析</span><h3>岗位画像与能力矩阵</h3><p>解析候选人简历、目标 JD、岗位级别和行业背景，生成面试重点、风险点和能力 Rubric。</p></div><div class="card"><span class="tag">多轮动态追问</span><h3>AI 面试官实时追问</h3><p>支持严厉型、友善型、压力型、Case 型、技术型和业务型面试官，根据回答动态调整问题。</p></div><div class="card"><span class="tag">报告 / 复盘</span><h3>结构化面后报告</h3><p>输出逐题评分、能力雷达、逻辑漏洞、表达建议、可复用回答模板和下一轮训练计划。</p></div></div></div></section>
+    <section id="architecture" class="dark-section"><div class="container"><div class="section-head"><h2>Agent Harness 架构</h2><p>系统通过 Planner、Question、Evaluator、Coach、Report 与 TTS 模块协作，验证 MiMo 在长链路 Agent、结构化评估和语音交互中的表现。</p></div><div class="grid-3"><div class="card"><h3>Planner Agent</h3><p>根据简历、JD 和岗位目标生成面试路径，决定能力维度、问题顺序和难度曲线。</p></div><div class="card"><h3>Question Agent</h3><p>生成分阶段问题与动态追问，支持中文、英文和中英混合面试。</p></div><div class="card"><h3>Evaluator Agent</h3><p>基于结构化 Rubric 输出评分、理由、风险标签和改进建议。</p></div><div class="card"><h3>Coach Agent</h3><p>将评分转化为可执行训练建议，包括 STAR 模板、数据分析路径和表达优化。</p></div><div class="card"><h3>Report Agent</h3><p>生成面后复盘报告、历史训练对比和下一阶段训练计划。</p></div><div class="card"><h3>MiMo TTS</h3><p>将面试官问题和追问语音化，构建更接近真实面试的交互体验。</p></div></div></div></section>
+    <section><div class="container"><div class="section-head"><h2>完整训练流程</h2><p>从输入材料到面后复盘，所有模块围绕真实求职训练场景设计。</p></div><div class="flow"><div class="flow-step"><b>1</b><strong>输入材料</strong><span>上传简历、目标 JD、岗位级别、目标公司与语言偏好。</span></div><div class="flow-step"><b>2</b><strong>生成画像</strong><span>构建候选人 Profile、岗位能力矩阵和高风险问题。</span></div><div class="flow-step"><b>3</b><strong>多轮面试</strong><span>10–15 轮动态追问，支持多种面试官风格。</span></div><div class="flow-step"><b>4</b><strong>实时评分</strong><span>按 Rubric 输出结构化评分、理由和下一轮策略。</span></div><div class="flow-step"><b>5</b><strong>复盘提升</strong><span>生成报告、回答模板、薄弱项分析和二次训练计划。</span></div></div></div></section>
+    <section id="demo" class="dark-section"><div class="container"><div class="section-head"><h2>项目更新日志</h2><p>面鸭 interview agent 目前处于原型开发与模型接入阶段，以下记录展示产品从需求验证到 Agent Harness 架构设计的推进过程。</p></div><div class="timeline-list"><div class="timeline-item"><span class="timeline-date">2026.04.15</span><div class="timeline-content"><h3>项目启动</h3><p>启动面鸭 interview agent 原型设计，确定以 AI 面试训练为核心方向，围绕简历、JD、岗位能力矩阵、多轮追问、实时评分和面后复盘构建完整闭环。</p></div></div><div class="timeline-item"><span class="timeline-date">2026.04.26</span><div class="timeline-content"><h3>完成首版面试官角色模板</h3><p>整理严厉型、友善型、压力型、Case 型、技术型和业务型面试官风格，并沉淀可复用 Prompt 模板与岗位 Rubric。</p></div></div><div class="timeline-item"><span class="timeline-date">2026.05.03</span><div class="timeline-content"><h3>完成结构化评分协议</h3><p>设计 JSON Schema 输出格式，覆盖 question、score、reason、follow_up、suggestion、tts_text、risk_tag 与 next_action 等字段。</p></div></div><div class="timeline-item"><span class="timeline-date">2026.05.07</span><div class="timeline-content"><h3>完成 Agent Harness 架构草案</h3><p>拆分 Planner、Question、Evaluator、Coach、Report 与 TTS 模块，定义各 Agent 的输入输出边界、调用顺序和异常回退策略。</p></div></div><div class="timeline-item"><span class="timeline-date">2026.05.09</span><div class="timeline-content"><h3>完成产品定位与核心流程设计</h3><p>明确“简历 / JD 输入 → 岗位画像 → 多轮 AI 面试 → 实时评分 → 面后报告”的完整训练闭环，并确定产品经理、AI 产品经理、运营和数据分析师作为首批目标岗位。</p></div></div></div><div class="hero-actions" style="margin-top:28px;"><button class="button contact-trigger" type="button" data-open-contact>联系项目</button><a class="button secondary" href="#architecture">查看系统架构</a></div></div></section>
+  </main>
+  <div class="modal-backdrop" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="contactTitle"><div class="modal"><div class="modal-head"><div><h3 id="contactTitle">联系项目</h3><p>面鸭 interview agent 目前处于原型开发阶段，欢迎通过以下方式联系项目。</p></div><button class="modal-close" type="button" data-close-contact aria-label="关闭弹窗">×</button></div><div class="contact-list"><a class="contact-item" href="mailto:zzrdezuiai@163.com"><span>邮箱</span><strong>zzrdezuiai@163.com</strong></a><a class="contact-item" href="https://github.com/zzrdezuiai-tech/interview-agent" target="_blank" rel="noopener noreferrer"><span>GitHub</span><strong>https://github.com/zzrdezuiai-tech/interview-agent</strong></a></div></div></div>
+  <footer class="footer"><div class="container footer-grid"><div>© 2026 面鸭 interview agent. Prototype project for AI interview training.</div><div>Contact: zzrdezuiai@163.com · GitHub: https://github.com/zzrdezuiai-tech/interview-agent</div></div></footer>
+  <script>
+    const contactModal=document.getElementById('contactModal'); const openContactButtons=document.querySelectorAll('[data-open-contact]'); const closeContactButton=document.querySelector('[data-close-contact]');
+    function openContactModal(){contactModal.classList.add('is-open');} function closeContactModal(){contactModal.classList.remove('is-open');}
+    openContactButtons.forEach((button)=>{button.addEventListener('click',openContactModal);}); closeContactButton.addEventListener('click',closeContactModal); contactModal.addEventListener('click',(event)=>{if(event.target===contactModal){closeContactModal();}}); document.addEventListener('keydown',(event)=>{if(event.key==='Escape'){closeContactModal();}});
+  </script>
+</body>
+</html>
